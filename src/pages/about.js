@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
 import { FiX } from "react-icons/fi"
-import { Layout } from "../components"
+import { Layout, SEO } from "../components"
 import {
   Article,
   Button,
@@ -28,7 +28,8 @@ const AboutPage = props => {
     `
   )
   return (
-    <Layout location={props.location}>
+    <Layout>
+      <SEO />
       <Article>
         <Header>
           <H2>{datoCmsAbout.title}</H2>
@@ -39,7 +40,11 @@ const AboutPage = props => {
           </Link>
         </Header>
         <Section>
-          <P dangerouslySetInnerHTML={{ __html: datoCmsAbout.contentNode.childMarkdownRemark.html }} />
+          <P
+            dangerouslySetInnerHTML={{
+              __html: datoCmsAbout.contentNode.childMarkdownRemark.html
+            }}
+          />
         </Section>
       </Article>
     </Layout>

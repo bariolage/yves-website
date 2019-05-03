@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby"
-import { Gallery, Layout } from "../components"
+import { Gallery, Layout, SEO } from "../components"
 import { Article, Button, H2, H3, Header, Link, Section } from "../components/elements"
 import { FiGrid, FiList } from "react-icons/fi"
 
@@ -40,6 +40,7 @@ const IndexPage = () => {
   const [list, setList] = useState(false)
   return (
     <Layout>
+      <SEO />
       <Article>
         <Header>
           <H2>Thèmes</H2>

@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
 import { FiX } from "react-icons/fi"
-import { Layout } from "../components"
+import { Layout, SEO } from "../components"
 import {
   Article,
   Button,
@@ -29,6 +29,7 @@ const ContactPage = () => {
   )
   return (
     <Layout>
+      <SEO />
       <Article>
         <Header>
           <H2>Contact</H2>

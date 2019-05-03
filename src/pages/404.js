@@ -1,9 +1,9 @@
 import React from "react"
-import { Layout } from "../components"
+import { Layout, SEO } from "../components"
 
 export default () => (
   <Layout>
-    <h1>Not Found</h1>
-    <p>You just hit a route that doesn&#39;t exist...</p>
+    <SEO />
+    <p>Oups, cette page n'existe pas...</p>
   </Layout>
 )
