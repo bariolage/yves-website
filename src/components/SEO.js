@@ -2,7 +2,7 @@ import React from "react"
 import Helmet from "react-helmet"
 import { graphql, useStaticQuery } from "gatsby"
 
-const SEO = ({ data }, isAlbum) => {
+const SEO = ({ albumData }, isa) => {
   const {
     site: { siteMetadata: base }
   } = useStaticQuery(
@@ -25,47 +25,42 @@ const SEO = ({ data }, isAlbum) => {
     `
   )
 
-  const baseSchema = [
-    {
-      "@context": "http://schema.org/",
-      "@type": "WebSite",
-      author: {
-        "@type": "Person",
-        name: base.author,
-        sameAs: `https://www.instagram.com/${base.instagram}`
-      },
-      description: base.description,
-      image: base.banner,
-      name: base.title,
-      url: base.siteUrl,
-      alternateName: base.titleAlt
+  const baseSchema = {
+    "@context": "http://schema.org/",
+    "@type": "WebSite",
+    author: {
+      "@type": "Person",
+      name: base.author,
+      sameAs: `https://www.instagram.com/${base.instagram}`
+    },
+    description: base.description,
+    image: base.banner,
+    name: base.title,
+    url: base.siteUrl,
+    alternateName: base.titleAlt
+  }
+
+  const albumSchema = {
+    "@context": "http://schema.org/",
+    "@type": "ImageGallery",
+    datePublished: albumData.datePublished,
+    description: albumData.description,
+    image: albumData.banner,
+    name: albumData.title,
+    url: `${base.siteUrl}/${albumData.slug}`,
+    author: {
+      "@type": "Person",
+      name: base.author,
+      sameAs: `https://www.instagram.com/${base.instagram}`
     }
-  ]
+  }
 
-  const schema = isAlbum
-    ? [
-        ...baseSchema,
-        {
-          "@context": "http://schema.org/",
-          "@type": "ImageGallery",
-          datePublished: data.datePublished,
-          description: data.description,
-          image: data.banner,
-          name: data.title,
-          url: `${base.siteUrl}/${data.slug}`,
-          author: {
-            "@type": "Person",
-            name: base.author,
-            sameAs: `https://www.instagram.com/${base.instagram}`
-          }
-        }
-      ]
-    : baseSchema
+  const schema = albumData ? [...baseSchema, ...albumSchema] : baseSchema
 
-  const title = data.title || base.title
-  const description = data.description || base.description
-  const image = data.banner || base.banner
-  const url = `${base.siteUrl}/${data.slug}` || base.siteUrl
+  const title = albumData.title || base.title
+  const description = albumData.description || base.description
+  const image = albumData.banner || base.banner
+  const url = `${base.siteUrl}/${albumData.slug}` || base.siteUrl
   const siteLanguage = base.siteLanguage
 
   return (
@@ -80,7 +75,6 @@ const SEO = ({ data }, isAlbum) => {
 
         {/* OpenGraph tags */}
         <meta property="og:url" content={url} />
-        {isAlbum ? <meta property="og:type" content="photography" /> : null}
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={image} />
@@ -88,6 +82,11 @@ const SEO = ({ data }, isAlbum) => {
       </Helmet>
     </>
   )
+}
+
+SEO.defaultProps = {
+  isAlbum: false,
+  albumData: {},
 }
 
 export default SEO

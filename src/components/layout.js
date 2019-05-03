@@ -5,6 +5,7 @@ import { Base } from "../styles/base"
 import styled, { ThemeProvider } from "styled-components"
 import { Box } from "rebass"
 import Navigation from "./navigation"
+import SEO from "./SEO"
 import { Link as GatsbyLink } from "gatsby"
 import { H1, Header, Link } from "./elements"
 
@@ -20,7 +21,7 @@ const Main = styled(Box)`
   margin: 0 auto;
   max-width: 60em;
 `
-const Layout = ({ children }) => {
+const Layout = ({ children, albumData }) => {
   const {
     site: { siteMetadata },
     allNavigationYaml: { navLinks }
@@ -44,7 +45,8 @@ const Layout = ({ children }) => {
   `)
   return (
     <ThemeProvider theme={theme}>
-      <Wrap width={1} px={[2,3,4]} py={4}>
+      <Wrap width={1} px={[2, 3, 4]} py={4}>
+        <SEO albumData={albumData} />
         <Base />
         <Header id="#home">
           <Link as={GatsbyLink} to="/">
@@ -58,6 +60,10 @@ const Layout = ({ children }) => {
       </Wrap>
     </ThemeProvider>
   )
+}
+
+Layout.defaultProps = {
+  albumData: {}
 }
 
 export default Layout

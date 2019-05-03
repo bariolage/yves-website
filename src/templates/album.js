@@ -24,8 +24,7 @@ const AlbumTemplate = ({ data: { datoCmsTheme } }) => {
   }
 
   return (
-    <Layout>
-      <SEO isAlbum data={seo} />
+    <Layout albumData={seo}>
       <Article>
         <Header>
           <H2>{datoCmsTheme.name}</H2>
@@ -55,6 +54,7 @@ export const albumQuery = graphql`
       id
       slug
       name
+      date
       albumInfo {
         title
         description

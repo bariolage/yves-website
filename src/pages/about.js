@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
 import { FiX } from "react-icons/fi"
-import { Layout, SEO } from "../components"
+import { Layout } from "../components"
 import {
   Article,
   Button,
@@ -29,7 +29,6 @@ const AboutPage = props => {
   )
   return (
     <Layout>
-      <SEO />
       <Article>
         <Header>
           <H2>{datoCmsAbout.title}</H2>
