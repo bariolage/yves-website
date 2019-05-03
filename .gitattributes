@@ -1,7 +1,0 @@
-# Auto detect text files and perform LF normalization
-* text=auto
-<<<<<<< HEAD
-# *.jpeg filter=lfs diff=lfs merge=lfs -text
-*.jpeg
-=======
->>>>>>> parent of 6ded2559... fix
