@@ -25,6 +25,8 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.6.1",
+    "react-images": "^0.5.19",
+    "react-photo-gallery": "^7.0.2",
     "rebass": "^3.1.0",
     "smooth-scroll": "^16.0.3",
     "styled-components": "^4.2.0",

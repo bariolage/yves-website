@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react"
 import {
+  Box,
   Button as RebassButton,
   Flex,
   Heading,
@@ -13,9 +14,10 @@ const Article = styled(
     <Flex {...props} as="article" width={1} flexDirection="column" ref={ref} />
   ))
 )``
-const Button = styled(
+
+const Toggle = styled(
   forwardRef((props, ref) => (
-    <RebassButton {...props} bg="primary" color="secondary" ref={ref} />
+    <Box {...props} as='span' bg="primary" color="secondary" ref={ref} />
   ))
 )`
   width: fit-content;
@@ -69,20 +71,6 @@ const H3 = styled(
   ))
 )``
 
-const Header = styled(
-  forwardRef((props, ref) => (
-    <Flex
-      {...props}
-      as="header"
-      width={1}
-      p={2}
-      justifyContent="space-between"
-      alignItems="baseline"
-      ref={ref}
-    />
-  ))
-)``
-
 const Li = styled(
   forwardRef((props, ref) => <Text {...props} as="li" ref={ref} />)
 )`
@@ -127,4 +115,4 @@ const Ul = styled(
   forwardRef((props, ref) => <Flex {...props} as="ul" ref={ref} />)
 )``
 
-export { Article, Button, H1, H2, H3, Header, Li, Link, P, Section, Ul }
+export { Article, Toggle, H1, H2, H3, Li, Link, P, Section, Ul }

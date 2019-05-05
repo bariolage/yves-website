@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby"
-import { Gallery, Layout } from "../components"
-import { Article, Button, H2, H3, Header, Link, Section } from "../components/elements"
+import { Header, Gallery, Layout } from "../components"
+import { Article, Toggle, H2, H3, Link, Section } from "../components/elements"
 import { FiGrid, FiList } from "react-icons/fi"
 
 const IndexPage = () => {
@@ -43,9 +43,9 @@ const IndexPage = () => {
       <Article>
         <Header>
           <H2>Thèmes</H2>
-          <Button onClick={() => setList(!list)}>
+          <Toggle onClick={() => setList(!list)}>
             {list ? <FiGrid size={16} /> : <FiList size={16} />}
-          </Button>
+          </Toggle>
         </Header>
         {list ? (
           <Section>

@@ -1,12 +1,12 @@
-import React, { forwardRef, useContext } from "react"
+import React, { forwardRef, useState, useEffect } from "react"
 import { Link } from "gatsby"
-import Image from "gatsby-image/withIEPolyfill"
+import Img from "gatsby-image/withIEPolyfill"
 import { Box, Flex, Text } from "rebass"
 import { style } from "styled-system"
-import { colors } from "../styles/theme"
 import styled from "styled-components"
-import WrapContext from "../utils/wrapContext"
-
+import Lightbox from "react-images"
+import Masonry from "./masonry"
+import { colors, theme } from "./layout"
 const columnCount = style({
   prop: "columnCount",
   key: "columnCount"
@@ -22,12 +22,16 @@ Grid.defaultProps = {
 }
 
 const Figure = styled(
-  forwardRef((props, ref) => <Box {...props} ref={ref} as="figure" p={2} />)
+  forwardRef((props, ref) => <Box {...props} ref={ref} as="figure" />)
 )`
   margin: 0;
   break-inside: avoid;
   position: relative;
   display: block;
+  cursor: ${props => (props.withLighbox ? "zoom-in" : "pointer")};
+  &:hover {
+    opacity: 0.9 !important;
+  }
 `
 
 const Figcaption = styled(
@@ -52,55 +56,83 @@ const Figcaption = styled(
   align-items: flex-end;
 `
 
-const Modal = styled(Flex)`
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: ${colors.primary};
-`
+const Gallery = ({ edges, columns, withLighbox, ...rest }) => {
+  const [images, setImages] = useState([])
+  const [isOpen, setOpen] = useState(false)
+  const [current, setCurrent] = useState(0)
 
-const Gallery = ({ edges, columns }) => {
-  const context = useContext(WrapContext)
+  useEffect(() => {
+    if (images.length === 0 && edges) {
+      setImages(
+        edges.map((e, i) => ({
+          index: i,
+          height: e.fluid.height,
+          width: e.fluid.width,
+          src: e.fluid.src,
+          srcSet: e.fluid.srcSet,
+          fluid: e.fluid,
+          caption: e.figcaption
+        }))
+      )
+    }
+  }, [images])
+
   return (
-    <Grid as="section" columnCount={columns} bg="primary">
-      {edges.map(edge => {
-        const isClick = context.modal === edge.id
-        const toggle = () =>
-          isClick ? context.setModal("") : context.setModal(edge.id)
-        return (
-          <Figure key={edge.id}>
-            {edge.link ? (
+    <>
+      <Masonry>
+        {edges.map((edge, index) => (
+          <Figure
+            key={edge.id}
+            onClick={() => {
+              setCurrent(index)
+              setOpen(true)
+            }}
+            withLighbox={withLighbox}
+          >
+            {withLighbox ? (
+              <Img fluid={edge.fluid} alt={edge.figcaption} />
+            ) : (
               <Link to={edge.link}>
-                <Image fluid={edge.fluid} alt="hello" />
+                <Img fluid={edge.fluid} alt={edge.figcaption} />
                 <Figcaption>{edge.figcaption}</Figcaption>
               </Link>
-            ) : (
-              /* is Click */
-              <Box onClick={toggle}>
-                {isClick ? (
-                  <Modal p={[2, 4]}>
-                    <Image
-                      style={{ width: "100%" }}
-                      big={isClick}
-                      fluid={edge.fluid}
-                      objectFit="contain"
-                      alt={edge.figcaption}
-                    />
-                  </Modal>
-                ) : (
-                  /* is Photo */
-                  <Image fluid={edge.fluid} alt={edge.figcaption} />
-                )}
-              </Box>
             )}
           </Figure>
-        )
-      })}
-    </Grid>
+        ))}
+      </Masonry>
+      {withLighbox && (
+        <Lightbox
+          images={images}
+          onClose={() => {
+            setOpen(false)
+            setCurrent(0)
+          }}
+          onClickPrev={() => setCurrent(current - 1)}
+          onClickNext={() => setCurrent(current + 1)}
+          currentImage={current}
+          isOpen={isOpen}
+          backdropClosesModal
+          //width={2000}
+          showThumbnails
+          showImageCount={false}
+          onClickThumbnail={imageIndex => setCurrent(imageIndex)}
+          theme={{
+            container: {
+              backgroundColor: "rgba(0,0,0,0.4)",
+              background: "#191919"
+            },
+            footer: {
+              display: "none"
+            }
+          }}
+        />
+      )}
+    </>
   )
+}
+
+Gallery.defaultProps = {
+  withLighbox: false
 }
 
 export default Gallery

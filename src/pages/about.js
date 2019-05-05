@@ -1,12 +1,11 @@
 import React from "react"
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
 import { FiX } from "react-icons/fi"
-import { Layout } from "../components"
+import { Header, Layout } from "../components"
 import {
   Article,
-  Button,
+  Toggle,
   H2,
-  Header,
   Link,
   P,
   Section
@@ -33,9 +32,9 @@ const AboutPage = props => {
         <Header>
           <H2>{datoCmsAbout.title}</H2>
           <Link as={GatsbyLink} to="/">
-            <Button>
+            <Toggle>
               <FiX size={16} />
-            </Button>
+            </Toggle>
           </Link>
         </Header>
         <Section>
