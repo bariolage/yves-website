@@ -28,7 +28,7 @@ const AlbumTemplate = ({ data: { datoCmsTheme } }) => {
       <Article>
         <Header>
           <H2>{datoCmsTheme.name}</H2>
-          <Link as={GatsbyLink} to="/">
+          <Link as={GatsbyLink} to="/" aria-label="retour">
             <Toggle>
               <FiX size={16} />
             </Toggle>
