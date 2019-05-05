@@ -1,7 +1,6 @@
 import React, { forwardRef } from "react"
 import {
   Box,
-  Button as RebassButton,
   Flex,
   Heading,
   Link as RebassLink,

@@ -26,12 +26,12 @@ export default () => {
           <Li key={node.id}>
             {//external link
             node.url.startsWith("http") ? (
-              <Link as="a" href={node.url}>
+              <Link as="a" href={node.url} aria-label={node.title}>
                 <P>{node.title}</P>
               </Link>
             ) : (
               //internal link
-              <Link as={GatsbyLink} to={`/${node.url}`}>
+              <Link as={GatsbyLink} to={`/${node.url}`} aria-label={node.title}>
                 <P>{node.title}</P>
               </Link>
             )}
