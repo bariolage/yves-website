@@ -3,13 +3,24 @@ import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby"
 import { Header, Gallery, Layout } from "../components"
 import { Article, Toggle, H2, H3, Link, Section } from "../components/elements"
 import { FiGrid, FiList } from "react-icons/fi"
+import Img from "gatsby-image"
 
 const IndexPage = () => {
   const {
-    allDatoCmsTheme: { edges }
+    allDatoCmsTheme: { edges },
+    file: {
+      childImageSharp: { fluid }
+    }
   } = useStaticQuery(
     graphql`
       query {
+        file(relativePath: { regex: "/banner/" }) {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
         allDatoCmsTheme {
           edges {
             node {
@@ -32,12 +43,11 @@ const IndexPage = () => {
     images.push({
       id: e.node.id,
       link: e.node.slug,
-      fluid:
-        e.node.thumbnail.fluid,
+      fluid: e.node.thumbnail.fluid,
       figcaption: e.node.name
     })
   })
-  const [list, setList] = useState(false)
+  const [list, setList] = useState(true)
   return (
     <Layout>
       <Article>
@@ -48,12 +58,15 @@ const IndexPage = () => {
           </Toggle>
         </Header>
         {list ? (
-          <Section>
+          <Section style={{ position: "relative" }}>
             {images.map(e => (
               <Link as={GatsbyLink} to={e.link} key={e.id}>
                 <H3 py={1}>{e.figcaption}</H3>
               </Link>
             ))}
+            <figure style={{ zIndex:-1,position: "absolute", paddingLeft:"65%",top:0, left: 0, right: 0, bottom: 0 }}>
+              <Img style={{height:"100%"}} fluid={fluid} alt="yves" />
+            </figure>
           </Section>
         ) : (
           <Gallery edges={images} />
