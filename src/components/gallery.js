@@ -5,7 +5,7 @@ import { Box, Text } from "rebass"
 import styled from "styled-components"
 import Lightbox from "react-images"
 import Masonry from "./masonry"
-import InView from "./inView"
+import InView from "./inview"
 
 const Figure = styled(
   forwardRef((props, ref) => <Box {...props} ref={ref} as="figure" />)
