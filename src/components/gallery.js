@@ -67,24 +67,23 @@ const Gallery = ({ edges, columns, withLighbox, ...rest }) => {
     <>
       <Masonry>
         {edges.map((edge, index) => (
-          <InView key={edge.id}>
-            <Figure
-              onClick={() => {
-                setCurrent(index)
-                setOpen(true)
-              }}
-              withLighbox={withLighbox}
-            >
-              {withLighbox ? (
+          <Figure
+            key={edge.id}
+            onClick={() => {
+              setCurrent(index)
+              setOpen(true)
+            }}
+            withLighbox={withLighbox}
+          >
+            {withLighbox ? (
+              <Img fluid={edge.fluid} alt={edge.figcaption} />
+            ) : (
+              <Link to={edge.link} aria-label={edge.figcaption}>
                 <Img fluid={edge.fluid} alt={edge.figcaption} />
-              ) : (
-                <Link to={edge.link} aria-label={edge.figcaption}>
-                  <Img fluid={edge.fluid} alt={edge.figcaption} />
-                  <Figcaption>{edge.figcaption}</Figcaption>
-                </Link>
-              )}
-            </Figure>
-          </InView>
+                <Figcaption>{edge.figcaption}</Figcaption>
+              </Link>
+            )}
+          </Figure>
         ))}
       </Masonry>
       {withLighbox && (
