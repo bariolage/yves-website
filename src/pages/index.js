@@ -59,14 +59,14 @@ const IndexPage = () => {
         </Header>
         {list ? (
           <Section style={{ position: "relative" }}>
+            <figure style={{paddingBottom: "1em" }}>
+              <Img style={{ height: "10em", width: "20em", maxWidth: "100%"}} fluid={fluid} alt="yves" />
+            </figure>
             {images.map(e => (
               <Link as={GatsbyLink} to={e.link} key={e.id}>
                 <H3 py={1}>{e.figcaption}</H3>
               </Link>
             ))}
-            <figure style={{ zIndex:-1,position: "absolute", paddingLeft:"65%",top:0, left: 0, right: 0, bottom: 0 }}>
-              <Img style={{height:"100%"}} fluid={fluid} alt="yves" />
-            </figure>
           </Section>
         ) : (
           <Gallery edges={images} />

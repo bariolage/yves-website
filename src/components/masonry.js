@@ -6,17 +6,19 @@ const Masonry = styled(
   forwardRef((props, ref) => <Flex as="section" {...props} ref={ref} />)
 )``
 
-const Column = styled(forwardRef((props, ref) => <Flex as="section" {...props} ref={ref} />))`
+const Column = styled(
+  forwardRef((props, ref) => <Flex as="section" {...props} ref={ref} />)
+)`
   flex-direction: column;
   figure {
-      margin: 1em;
+    margin: 1em;
   }
 `
 
-export default ({ children, gap, minWidth = 300 }) => {
+export default ({ children, gap, minWidth = 250 }) => {
   const cols = []
   const ref = useRef()
-  const [numCols, setNumCols] = useState(3)
+  const [numCols, setNumCols] = useState(1)
 
   const calcNumCols = () =>
     setNumCols(Math.floor(ref.current.offsetWidth / minWidth))
@@ -28,9 +30,10 @@ export default ({ children, gap, minWidth = 300 }) => {
 
   useEffect(() => {
     calcNumCols()
-    window.addEventListener(`resize`, calcNumCols)
-    return () => window.removeEventListener(`resize`, calcNumCols)
+    window.onresize = calcNumCols
+    return () => (window.onresize = null)
   })
+
   createCols()
 
   return (

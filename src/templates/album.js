@@ -1,10 +1,10 @@
-import React from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { graphql, Link as GatsbyLink } from "gatsby"
 import { Box } from "rebass"
 import { Header, Layout, Gallery } from "../components"
 import { Article, Toggle, H2, Link, P } from "../components/elements"
 import { FiX } from "react-icons/fi"
-
+import Sticky from "../components/sticky"
 const AlbumTemplate = ({ data: { datoCmsTheme } }) => {
   const images = []
   datoCmsTheme.gallery.forEach(e => {
@@ -26,14 +26,16 @@ const AlbumTemplate = ({ data: { datoCmsTheme } }) => {
   return (
     <Layout albumData={seo}>
       <Article>
-        <Header>
-          <H2>{datoCmsTheme.name}</H2>
-          <Link as={GatsbyLink} to="/" aria-label="retour">
-            <Toggle>
-              <FiX size={16} />
-            </Toggle>
-          </Link>
-        </Header>
+        <Sticky>
+          <Header>
+            <H2>{datoCmsTheme.name}</H2>
+            <Link as={GatsbyLink} to="/" aria-label="retour">
+              <Toggle>
+                <FiX size={16} />
+              </Toggle>
+            </Link>
+          </Header>
+        </Sticky>
         <Box as="section" p={2}>
           <P
             pb={4}

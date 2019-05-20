@@ -1,10 +1,11 @@
-import React, { forwardRef, useState, useEffect } from "react"
+import React, { forwardRef, useRef, useState, useEffect } from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image/withIEPolyfill"
 import { Box, Text } from "rebass"
 import styled from "styled-components"
 import Lightbox from "react-images"
 import Masonry from "./masonry"
+import InView from "./inView"
 
 const Figure = styled(
   forwardRef((props, ref) => <Box {...props} ref={ref} as="figure" />)
@@ -66,23 +67,24 @@ const Gallery = ({ edges, columns, withLighbox, ...rest }) => {
     <>
       <Masonry>
         {edges.map((edge, index) => (
-          <Figure
-            key={edge.id}
-            onClick={() => {
-              setCurrent(index)
-              setOpen(true)
-            }}
-            withLighbox={withLighbox}
-          >
-            {withLighbox ? (
-              <Img fluid={edge.fluid} alt={edge.figcaption} />
-            ) : (
-              <Link to={edge.link} aria-label={edge.figcaption}>
+          <InView key={edge.id}>
+            <Figure
+              onClick={() => {
+                setCurrent(index)
+                setOpen(true)
+              }}
+              withLighbox={withLighbox}
+            >
+              {withLighbox ? (
                 <Img fluid={edge.fluid} alt={edge.figcaption} />
-                <Figcaption>{edge.figcaption}</Figcaption>
-              </Link>
-            )}
-          </Figure>
+              ) : (
+                <Link to={edge.link} aria-label={edge.figcaption}>
+                  <Img fluid={edge.fluid} alt={edge.figcaption} />
+                  <Figcaption>{edge.figcaption}</Figcaption>
+                </Link>
+              )}
+            </Figure>
+          </InView>
         ))}
       </Masonry>
       {withLighbox && (
