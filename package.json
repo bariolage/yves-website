@@ -33,7 +33,6 @@
     "rebass": "^3.1.0",
     "smooth-scroll": "^16.0.3",
     "styled-components": "^4.2.0",
-    "styled-system": "^4.1.0",
     "typeface-josefin-sans": "^0.0.54"
   }
 }

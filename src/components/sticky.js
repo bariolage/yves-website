@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react"
 import { Box } from "rebass"
 
-const fixed = {
+const sticky = {
   position: "fixed",
   top: "0",
   left: "0",
@@ -12,7 +12,7 @@ const fixed = {
   transition: "0.3s"
 }
 
-export default ({ children }) => {
+export default ({ children, altStyle }) => {
   const ref = useRef()
   const [isStick, setSticky] = useState(false)
 
@@ -27,10 +27,11 @@ export default ({ children }) => {
   return (
     <Box
       width={1}
-      p={isStick ? 2 : 0}
+      py={isStick ? 2 : 0}
+      px={isStick ? [2,3,0] : 0}
       ref={ref}
       bg="white"
-      css={isStick && fixed}
+      css={isStick && (altStyle || sticky)}
     >
       {children}
     </Box>

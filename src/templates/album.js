@@ -5,6 +5,8 @@ import { Header, Layout, Gallery } from "../components"
 import { Article, Toggle, H2, Link, P } from "../components/elements"
 import { FiX } from "react-icons/fi"
 import Sticky from "../components/sticky"
+
+
 const AlbumTemplate = ({ data: { datoCmsTheme } }) => {
   const images = []
   datoCmsTheme.gallery.forEach(e => {

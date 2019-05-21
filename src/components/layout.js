@@ -78,7 +78,7 @@ const Layout = ({ children, albumData }) => {
           <Link as={GatsbyLink} to="/" aria-label="yves le bras - accueil">
             <H1 id="top">{siteMetadata.title}</H1>
           </Link>
-            <Navigation />
+          <Navigation />
         </Header>
         <Main as="main" width={1}>
           {children}

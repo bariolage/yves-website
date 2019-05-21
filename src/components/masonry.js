@@ -11,7 +11,7 @@ const Column = styled(
 )`
   flex-direction: column;
   figure {
-    margin: 1em;
+    margin: 8px;
   }
 `
 
