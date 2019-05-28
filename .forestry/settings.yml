@@ -20,10 +20,6 @@ sections:
 - type: document
   path: src/config/navigation.yaml
   label: Links
-upload_dir: assets/images
-public_path: assets/images
-front_matter_path: "../images"
-use_front_matter_path: true
 file_template: ":filename:"
 build:
   preview_command: gatsby build
