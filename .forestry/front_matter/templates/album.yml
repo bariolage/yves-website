@@ -13,6 +13,3 @@ fields:
 - type: image_gallery
   name: photos
   label: Photos
-pages:
-- assets/albums/textures.md
-- assets/albums/frontières.md
