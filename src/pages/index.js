@@ -28,7 +28,7 @@ const IndexPage = () => {
               name
               slug
               thumbnail {
-                fluid {
+                fluid(maxWidth: 350) {
                   ...GatsbyDatoCmsFluid_noBase64
                 }
               }
@@ -59,8 +59,12 @@ const IndexPage = () => {
         </Header>
         {list ? (
           <Section style={{ position: "relative" }}>
-            <figure style={{paddingBottom: "1em" }}>
-              <Img style={{ height: "10em", width: "20em", maxWidth: "100%"}} fluid={fluid} alt="yves" />
+            <figure style={{ paddingBottom: "1em" }}>
+              <Img
+                style={{ height: "10em", width: "20em", maxWidth: "100%" }}
+                fluid={fluid}
+                alt="yves"
+              />
             </figure>
             {images.map(e => (
               <Link to={e.link} key={e.id}>
