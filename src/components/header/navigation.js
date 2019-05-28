@@ -1,7 +1,18 @@
-import React from "react"
+import React, { forwardRef } from "react"
 import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby"
-import { Box } from "rebass"
-import { Li, Link, P, Ul } from "./elements"
+import styled from "styled-components"
+import { Box, Flex, Text } from "rebass"
+import { Paragraph, Link } from "../elements"
+
+const Ul = styled(
+  forwardRef((props, ref) => <Flex {...props} as="ul" ref={ref} />)
+)``
+
+const Li = styled(
+  forwardRef((props, ref) => <Text {...props} as="li" ref={ref} />)
+)`
+  list-style: none;
+`
 
 export default () => {
   const {
@@ -26,13 +37,16 @@ export default () => {
           <Li key={node.id}>
             {//external link
             node.url.startsWith("http") ? (
-              <Link as="a" href={node.url} aria-label={node.title}>
-                <P>{node.title}</P>
+              
+              <Link href={node.url} aria-label={node.title}>
+
+                <Paragraph>{node.title}</Paragraph>
               </Link>
             ) : (
               //internal link
-              <Link as={GatsbyLink} to={`/${node.url}`} aria-label={node.title}>
-                <P>{node.title}</P>
+              <Link to={`/${node.url}`} aria-label={node.title}>
+                <Paragraph>{node.title}</Paragraph>
+
               </Link>
             )}
           </Li>

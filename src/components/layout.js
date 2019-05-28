@@ -1,12 +1,8 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components"
 import { Box } from "rebass"
 import Header from "./header"
-import Navigation from "./navigation"
 import SEO from "./SEO"
-import { Link as GatsbyLink } from "gatsby"
-import { H1, Link } from "./elements"
 import "typeface-josefin-sans"
 
 export const colors = {
@@ -57,29 +53,16 @@ const Main = styled(Box)`
   margin: 0 auto;
   max-width: 60em;
 `
+
+
 const Layout = ({ children, albumData }) => {
-  const {
-    site: { siteMetadata }
-  } = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+
   return (
     <ThemeProvider theme={theme}>
       <Wrap width={1} px={[2, 3, 4]} py={4}>
         <SEO albumData={albumData} />
         <GlobalStyle />
-        <Header id="#home">
-          <Link as={GatsbyLink} to="/" aria-label="yves le bras - accueil">
-            <H1 id="top">{siteMetadata.title}</H1>
-          </Link>
-          <Navigation />
-        </Header>
+        <Header id="#home" />
         <Main as="main" width={1}>
           {children}
         </Main>

@@ -7,9 +7,10 @@ import {
   Toggle,
   H2,
   Link,
-  P,
-  Section
+  Section,
+  Paragraph
 } from "../components/elements"
+
 
 const AboutPage = props => {
   const { datoCmsAbout } = useStaticQuery(
@@ -38,7 +39,7 @@ const AboutPage = props => {
           </Link>
         </Header>
         <Section>
-          <P
+          <Paragraph
             dangerouslySetInnerHTML={{
               __html: datoCmsAbout.contentNode.childMarkdownRemark.html
             }}

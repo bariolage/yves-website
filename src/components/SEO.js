@@ -33,7 +33,7 @@ const SEO = ({ albumData }, isa) => {
       name: base.author,
       sameAs: `https://www.instagram.com/${base.instagram}`
     },
-    description: base.description,
+    about: base.description,
     image: base.banner,
     name: base.title,
     url: base.siteUrl,

@@ -1,4 +1,4 @@
-const config = require("./src/config/config")
+const config = require("./src/config")
 const pathPrefix = config.pathPrefix === "/" ? "" : config.pathPrefix
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -44,6 +44,13 @@ module.exports = {
       options: {
         name: `assets`,
         path: `${__dirname}/assets`
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `header`,
+        path: `${__dirname}/src/components/header`
       }
     },
     {

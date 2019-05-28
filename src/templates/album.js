@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from "react"
+import React from "react"
 import { graphql, Link as GatsbyLink } from "gatsby"
 import { Box } from "rebass"
 import { Header, Layout, Gallery } from "../components"
-import { Article, Toggle, H2, Link, P } from "../components/elements"
+import { Article, Toggle, H2, Link, Paragraph, Section } from "../components/elements"
 import { FiX } from "react-icons/fi"
-import Sticky from "../components/sticky"
-
 
 const AlbumTemplate = ({ data: { datoCmsTheme } }) => {
   const images = []
@@ -28,22 +26,20 @@ const AlbumTemplate = ({ data: { datoCmsTheme } }) => {
   return (
     <Layout albumData={seo}>
       <Article>
-        <Sticky>
-          <Header>
-            <H2>{datoCmsTheme.name}</H2>
-            <Link as={GatsbyLink} to="/" aria-label="retour">
-              <Toggle>
-                <FiX size={16} />
-              </Toggle>
-            </Link>
-          </Header>
-        </Sticky>
-        <Box as="section" p={2}>
-          <P
+        <Header>
+          <H2>{datoCmsTheme.name}</H2>
+          <Link as={GatsbyLink} to="/" aria-label="retour">
+            <Toggle>
+              <FiX size={16} />
+            </Toggle>
+          </Link>
+        </Header>
+        <Section p={2}>
+          <Paragraph
             pb={4}
             dangerouslySetInnerHTML={{ __html: datoCmsTheme.content }}
           />
-        </Box>
+        </Section>
         <Gallery withLighbox edges={images} />
       </Article>
     </Layout>

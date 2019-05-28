@@ -47,7 +47,7 @@ const IndexPage = () => {
       figcaption: e.node.name
     })
   })
-  const [list, setList] = useState(true)
+  const [list, setList] = useState(false)
   return (
     <Layout>
       <Article>
@@ -63,7 +63,7 @@ const IndexPage = () => {
               <Img style={{ height: "10em", width: "20em", maxWidth: "100%"}} fluid={fluid} alt="yves" />
             </figure>
             {images.map(e => (
-              <Link as={GatsbyLink} to={e.link} key={e.id}>
+              <Link to={e.link} key={e.id}>
                 <H3 py={1}>{e.figcaption}</H3>
               </Link>
             ))}

@@ -1,11 +1,10 @@
-import React, { forwardRef, useRef, useState, useEffect } from "react"
-import { Link } from "gatsby"
+import React, { forwardRef, useState, useEffect } from "react"
 import Img from "gatsby-image/withIEPolyfill"
 import { Box, Text } from "rebass"
 import styled from "styled-components"
+import { Link } from "../elements"
 import Lightbox from "react-images"
 import Masonry from "./masonry"
-import InView from "./inview"
 
 const Figure = styled(
   forwardRef((props, ref) => <Box {...props} ref={ref} as="figure" />)
@@ -42,7 +41,7 @@ const Figcaption = styled(
   align-items: flex-end;
 `
 
-const Gallery = ({ edges, columns, withLighbox, ...rest }) => {
+export default ({ edges, columns, withLighbox = false }) => {
   const [images, setImages] = useState([])
   const [isOpen, setOpen] = useState(false)
   const [current, setCurrent] = useState(0)
@@ -98,7 +97,6 @@ const Gallery = ({ edges, columns, withLighbox, ...rest }) => {
           currentImage={current}
           isOpen={isOpen}
           backdropClosesModal
-          //width={2000}
           showThumbnails
           showImageCount={false}
           onClickThumbnail={imageIndex => setCurrent(imageIndex)}
@@ -116,9 +114,3 @@ const Gallery = ({ edges, columns, withLighbox, ...rest }) => {
     </>
   )
 }
-
-Gallery.defaultProps = {
-  withLighbox: false
-}
-
-export default Gallery
