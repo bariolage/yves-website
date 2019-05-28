@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react"
-import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 import { Box, Flex, Text } from "rebass"
 import { Paragraph, Link } from "../elements"
@@ -39,14 +39,12 @@ export default () => {
             node.url.startsWith("http") ? (
               
               <Link href={node.url} aria-label={node.title}>
-
                 <Paragraph>{node.title}</Paragraph>
               </Link>
             ) : (
               //internal link
               <Link to={`/${node.url}`} aria-label={node.title}>
                 <Paragraph>{node.title}</Paragraph>
-
               </Link>
             )}
           </Li>
