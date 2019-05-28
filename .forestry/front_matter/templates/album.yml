@@ -1,0 +1,18 @@
+---
+label: Album
+hide_body: false
+fields:
+- type: text
+  label: Nom
+  name: title
+  config:
+    required: true
+- type: datetime
+  name: date
+  label: Date
+- type: image_gallery
+  name: photos
+  label: Photos
+pages:
+- assets/albums/textures.md
+- assets/albums/frontières.md
