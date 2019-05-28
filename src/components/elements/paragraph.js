@@ -11,6 +11,7 @@ const Paragraph = styled(
       fontFamily="sUI"
       color="secondary"
       ref={ref}
+      fontSize={3}
     />
   ))
 )`

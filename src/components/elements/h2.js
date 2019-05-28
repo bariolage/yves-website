@@ -7,7 +7,7 @@ const H2 = styled(
     <Heading
       {...props}
       as="h2"
-      fontSize={[3,4,5]}
+      fontSize={5}
       fontWeight={"body"}
       fontFamily="sUI"
       color="secondary"

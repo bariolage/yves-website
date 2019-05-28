@@ -58,16 +58,16 @@ const IndexPage = () => {
           </Toggle>
         </Header>
         {list ? (
-          <Section style={{ position: "relative" }}>
-            <figure style={{ paddingBottom: "1em" }}>
+          <Section style={{ position: "relative" }} alignItems='center'>
+            <figure style={{ paddingBottom: "2em" }}>
               <Img
-                style={{ height: "10em", width: "20em", maxWidth: "100%" }}
+                style={{ height: "10em", width: "30em", maxWidth: "100%" }}
                 fluid={fluid}
                 alt="yves"
               />
             </figure>
             {images.map(e => (
-              <Link to={e.link} key={e.id}>
+              <Link to={e.link} key={e.id} textAlign="center">
                 <H3 py={1}>{e.figcaption}</H3>
               </Link>
             ))}
