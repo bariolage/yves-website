@@ -74,7 +74,7 @@ export const albumQuery = graphql`
       gallery {
         id
         title
-        fluid(maxWidth: 1024) {
+        fluid(maxWidth: 300) {
           ...GatsbyDatoCmsFluid_noBase64
         }
       }

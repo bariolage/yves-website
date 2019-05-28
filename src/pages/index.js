@@ -28,7 +28,7 @@ const IndexPage = () => {
               name
               slug
               thumbnail {
-                fluid(maxWidth: 350) {
+                fluid(maxWidth: 300) {
                   ...GatsbyDatoCmsFluid_noBase64
                 }
               }
