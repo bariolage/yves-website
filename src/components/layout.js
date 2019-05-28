@@ -15,7 +15,7 @@ export const colors = {
 }
 
 export const theme = {
-  breakpoints: ["48em", "60em", "76em", "96em"],
+  breakpoints: ["30em", "48em", "60em", "76em", "96em"],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fontSizes: [12, 14, 16, 20, 24, 36, 48, 80, 96],
   fontWeights: {
@@ -59,7 +59,7 @@ const Layout = ({ children, albumData }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Wrap width={1} px={[2, 3, 4]} py={4}>
+      <Wrap width={1} px={[2, 3, 4]} py={[3,3,4]}>
         <SEO albumData={albumData} />
         <GlobalStyle />
         <Header id="#home" />

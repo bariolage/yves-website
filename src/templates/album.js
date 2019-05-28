@@ -2,7 +2,14 @@ import React from "react"
 import { graphql, Link as GatsbyLink } from "gatsby"
 import { Box } from "rebass"
 import { Header, Layout, Gallery } from "../components"
-import { Article, Toggle, H2, Link, Paragraph, Section } from "../components/elements"
+import {
+  Article,
+  Toggle,
+  H2,
+  Link,
+  Paragraph,
+  Section
+} from "../components/elements"
 import { FiX } from "react-icons/fi"
 
 const AlbumTemplate = ({ data: { datoCmsTheme } }) => {
@@ -34,12 +41,14 @@ const AlbumTemplate = ({ data: { datoCmsTheme } }) => {
             </Toggle>
           </Link>
         </Header>
-        <Section p={2}>
-          <Paragraph
-            pb={4}
-            dangerouslySetInnerHTML={{ __html: datoCmsTheme.content }}
-          />
-        </Section>
+        {datoCmsTheme.content && (
+          <Section p={2}>
+            <Paragraph
+              pb={4}
+              dangerouslySetInnerHTML={{ __html: datoCmsTheme.content }}
+            />
+          </Section>
+        )}
         <Gallery withLighbox edges={images} />
       </Article>
     </Layout>

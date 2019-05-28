@@ -9,11 +9,6 @@ const textDecoration = style({
   cssProperty: "textDecoration"
 })
 
-const textAlign = style({
-  prop: "textAlign",
-  cssProperty: "textAlign"
-})
-
 const Link = styled(
   forwardRef((props, ref) => (
     <RebassLink
@@ -21,20 +16,20 @@ const Link = styled(
       {...props}
       ref={ref}
       fontSize={1}
+      color="red"
     />
   ))
 )`
-  min-width: 48px;
-  min-height: 48px;
   display: block;
   opacity: 0.8;
-  ${textDecoration};
+  text-decoration: none;
   ${fontFamily};
-  ${textAlign};
   &:hover {
     opacity: 1;
-    text-decoration: underline;
+    ${textDecoration};
   }
 `
-
-export default props => <Link {...props} textDecoration="none" />
+Link.defaultProps = {
+  textDecoration: 'underline'
+}
+export default props => <Link {...props} />

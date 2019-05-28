@@ -17,6 +17,7 @@ const Header = styled(
       justifyContent="space-between"
       alignItems="baseline"
       bg="white"
+      flexWrap='wrap'
     />
   ))
 )``
@@ -55,7 +56,7 @@ export default ({ children }) => {
         </Sticky>
       ) : (
         <Header>
-          <Link to="/" aria-label="yves le bras - accueil">
+          <Link to="/" aria-label="yves le bras - accueil" textDecoration="none">
             <H1 id="top">{siteMetadata.title}</H1>
           </Link>
           <Navigation />

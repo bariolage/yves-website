@@ -31,7 +31,7 @@ export default () => {
     }
   `)
   return (
-    <Box as="nav">
+    <Box as="nav" ml="auto">
       <Ul flexDirection="column" alignItems="flex-end">
         {edges.map(({ node }) => (
           <Li key={node.id}>
