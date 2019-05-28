@@ -1,12 +1,14 @@
 backend:
-  name: test-repo
+  name: git-gateway
+  branch: master
 
 media_library:
   name: cloudinary
   config:
     cloud_name: kaiju
     api_key: 843537744654599
-public_folder: assets
+media_folder: assets/images
+public_folder: assets/images
 
 collections:
   - name: blog

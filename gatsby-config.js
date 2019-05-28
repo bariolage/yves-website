@@ -1,7 +1,7 @@
 const config = require("./src/config")
 const pathPrefix = config.pathPrefix === "/" ? "" : config.pathPrefix
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env.${process.env.NODE_ENV}`
 })
 
 module.exports = {
@@ -28,7 +28,7 @@ module.exports = {
         background_color: config.backgroundColor,
         theme_color: config.themeColor,
         display: "standalone",
-        icon: config.favicon,
+        icon: config.favicon
       }
     },
     {
@@ -36,8 +36,8 @@ module.exports = {
       options: {
         apiToken: process.env.API_KEY,
         preview: false,
-        disableLiveReload: false,
-      },
+        disableLiveReload: false
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
@@ -90,6 +90,14 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-transformer-yaml`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-netlify-cms`
+    {
+      resolve: "gatsby-plugin-netlify-cms",
+      options: {
+        modulePath: `${__dirname}/src/cms/index.js`,
+        options: {
+          manualInit: true
+        }
+      }
+    }
   ]
 }
