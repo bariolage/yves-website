@@ -20,10 +20,10 @@ exports.createPages = ({ graphql, actions }) => {
       graphql(
         `
           {
-            allDatoCmsTheme {
+            allContentfulTheme(filter: {node_locale: {eq: "fr"}}) {
               edges {
                 node {
-                  id
+                  contentful_id
                   slug
                 }
               }
@@ -35,11 +35,11 @@ exports.createPages = ({ graphql, actions }) => {
           console.error(result.errors)
           reject(result.errors)
         }
-        result.data.allDatoCmsTheme.edges.forEach(({ node }) => {
+        result.data.allContentfulTheme.edges.forEach(({ node }) => {
           createPage({
             path: node.slug,
             component: path.resolve(`./src/templates/album.js`),
-            context: { id: node.id }
+            context: { id: node.contentful_id }
           })
         })
       })

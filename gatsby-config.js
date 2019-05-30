@@ -32,11 +32,11 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-source-datocms`,
+      resolve: `gatsby-source-contentful`,
       options: {
-        apiToken: process.env.API_KEY,
-        preview: false,
-        disableLiveReload: false
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        downloadLocal: true
       }
     },
     {
@@ -71,6 +71,12 @@ module.exports = {
             }
           },
           {
+            resolve: `gatsby-remark-images-contentful`,
+            options: {
+              maxWidth: 590,
+            },
+          },
+          {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
               wrapperStyle: `margin-bottom: 1.0725rem`
@@ -89,15 +95,6 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-styled-components`,
     `gatsby-transformer-yaml`,
-    `gatsby-plugin-sharp`,
-    {
-      resolve: "gatsby-plugin-netlify-cms",
-      options: {
-        modulePath: `${__dirname}/src/cms/index.js`,
-        options: {
-          manualInit: true
-        }
-      }
-    }
+    `gatsby-plugin-sharp`
   ]
 }

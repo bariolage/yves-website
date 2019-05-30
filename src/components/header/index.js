@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { Flex, Heading } from "rebass"
 import styled from "styled-components"
 import Navigation from "./navigation"
+import Locale from "./locale"
 import Sticky from "./sticky"
 import { Link } from "../elements"
 
@@ -17,7 +18,7 @@ const Header = styled(
       justifyContent="space-between"
       alignItems="baseline"
       bg="white"
-      flexWrap='wrap'
+      flexWrap="wrap"
     />
   ))
 )``
@@ -56,9 +57,14 @@ export default ({ children }) => {
         </Sticky>
       ) : (
         <Header>
-          <Link to="/" aria-label="yves le bras - accueil" textDecoration="none">
+          <Link
+            to="/"
+            aria-label="yves le bras - accueil"
+            textDecoration="none"
+          >
             <H1 id="top">{siteMetadata.title}</H1>
           </Link>
+          <Locale />
           <Navigation />
         </Header>
       )}

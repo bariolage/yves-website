@@ -1,18 +1,31 @@
-import React from "react"
+import React, { useContext } from "react"
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
 import { FiX } from "react-icons/fi"
 import { Header, Layout } from "../components"
-import { Article, Toggle, H2, Link, Paragraph, Section } from "../components/elements"
+import {
+  Article,
+  Toggle,
+  H2,
+  Link,
+  Paragraph,
+  Section
+} from "../components/elements"
+import Context from "../components/store"
 
 const ContactPage = () => {
-  const { datoCmsContact } = useStaticQuery(
+  const context = useContext(Context)
+  const lang = context.lang ? 1 : 0
+  const {
+    allContentfulInformations: { edges }
+  } = useStaticQuery(
     graphql`
       query {
-        datoCmsContact {
-          title
-          contentNode {
-            childMarkdownRemark {
-              html
+        allContentfulInformations {
+          edges {
+            node {
+              id
+              sections
+              contact
             }
           }
         }
@@ -23,7 +36,7 @@ const ContactPage = () => {
     <Layout>
       <Article>
         <Header>
-          <H2>Contact</H2>
+          <H2>{edges[lang].node.sections[2]}</H2>
           <Link as={GatsbyLink} to="/">
             <Toggle>
               <FiX size={16} />
@@ -31,11 +44,9 @@ const ContactPage = () => {
           </Link>
         </Header>
         <Section>
-          <Paragraph
-            dangerouslySetInnerHTML={{
-              __html: datoCmsContact.contentNode.childMarkdownRemark.html
-            }}
-          />
+          {edges[0].node.contact.map(e => (
+            <Paragraph>{e}</Paragraph>
+          ))}
         </Section>
       </Article>
     </Layout>

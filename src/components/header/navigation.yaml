@@ -1,6 +1,10 @@
 - title: instagram
+  titleFr: instagram
   url: "https://www.instagram.com/yvlebras/"
 - title: about
+  titleFr: à propos
   url: "about"
 - title: contact
+  titleFr: contact
   url: "contact"
+

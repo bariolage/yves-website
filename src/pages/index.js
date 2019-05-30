@@ -1,16 +1,19 @@
-import React, { useState } from "react"
-import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby"
+import React, { useContext } from "react"
+import { graphql, useStaticQuery } from "gatsby"
 import { Header, Gallery, Layout } from "../components"
 import { Article, Toggle, H2, H3, Link, Section } from "../components/elements"
 import { FiGrid, FiList } from "react-icons/fi"
 import Img from "gatsby-image"
+import Context from "../components/store"
 
 const IndexPage = () => {
+  const context = useContext(Context)
+  const lang = context.lang ? 1 : 0
   const {
-    allDatoCmsTheme: { edges },
-    file: {
-      childImageSharp: { fluid }
-    }
+    contentUS: { edges: edgesUS },
+    contentFR: { edges: edgesFR },
+    content: { edges },
+    infos: { edges: edgesInfo },
   } = useStaticQuery(
     graphql`
       query {
@@ -21,15 +24,45 @@ const IndexPage = () => {
             }
           }
         }
-        allDatoCmsTheme {
+        infos: allContentfulInformations {
+          edges {
+            node {
+              sections
+              image {
+                fluid(maxWidth: 300) {
+                  ...GatsbyContentfulFluid_withWebp_noBase64
+                }
+              }
+            }
+          }
+        }
+        contentUS: allContentfulTheme(
+          filter: { node_locale: { eq: "en-US" } }
+        ) {
           edges {
             node {
               id
               name
+            }
+          }
+        }
+        contentFR: allContentfulTheme(filter: { node_locale: { eq: "fr" } }) {
+          edges {
+            node {
+              id
+              name
+            }
+          }
+        }
+        content: allContentfulTheme(filter: { node_locale: { eq: "fr" } }) {
+          edges {
+            node {
+              id
               slug
               thumbnail {
+                id
                 fluid(maxWidth: 300) {
-                  ...GatsbyDatoCmsFluid_noBase64
+                  ...GatsbyContentfulFluid_withWebp_noBase64
                 }
               }
             }
@@ -39,30 +72,30 @@ const IndexPage = () => {
     `
   )
   const images = []
-  edges.forEach(e => {
+  edges.forEach((e, i) => {
     images.push({
       id: e.node.id,
       link: e.node.slug,
       fluid: e.node.thumbnail.fluid,
-      figcaption: e.node.name
+      figcaption: context.lang ? edgesFR[i].node.name : edgesUS[i].node.name
     })
   })
-  const [list, setList] = useState(true)
+
   return (
     <Layout>
       <Article>
         <Header>
-          <H2>Thèmes</H2>
-          <Toggle onClick={() => setList(!list)}>
-            {list ? <FiGrid size={16} /> : <FiList size={16} />}
+          <H2>{edgesInfo[lang].node.sections[0]}</H2>
+          <Toggle onClick={() => context.setList(!context.list)}>
+            {context.list ? <FiGrid size={16} /> : <FiList size={16} />}
           </Toggle>
         </Header>
-        {list ? (
-          <Section style={{ position: "relative" }} alignItems='center'>
+        {context.list ? (
+          <Section style={{ position: "relative" }} alignItems="center">
             <figure style={{ paddingBottom: "2em" }}>
               <Img
                 style={{ height: "10em", width: "30em", maxWidth: "100%" }}
-                fluid={fluid}
+                fluid={edgesInfo[lang].node.image.fluid}
                 alt="yves"
               />
             </figure>

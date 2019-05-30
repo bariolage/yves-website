@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
 import { FiX } from "react-icons/fi"
 import { Header, Layout } from "../components"
@@ -10,17 +10,26 @@ import {
   Section,
   Paragraph
 } from "../components/elements"
+import Context from "../components/store"
 
-
-const AboutPage = props => {
-  const { datoCmsAbout } = useStaticQuery(
+const AboutPage = () => {
+  const context = useContext(Context)
+  const lang = context.lang ? 1 : 0
+  const {
+    allContentfulInformations: { edges }
+  } = useStaticQuery(
     graphql`
       query {
-        datoCmsAbout {
-          title
-          contentNode {
-            childMarkdownRemark {
-              html
+        allContentfulInformations {
+          edges {
+            node {
+              id
+              sections
+              biographie {
+                childMarkdownRemark {
+                  html
+                }
+              }
             }
           }
         }
@@ -31,7 +40,7 @@ const AboutPage = props => {
     <Layout>
       <Article>
         <Header>
-          <H2>{datoCmsAbout.title}</H2>
+          <H2>{edges[lang].node.sections[1]}</H2>
           <Link as={GatsbyLink} to="/">
             <Toggle>
               <FiX size={16} />
@@ -41,7 +50,7 @@ const AboutPage = props => {
         <Section>
           <Paragraph
             dangerouslySetInnerHTML={{
-              __html: datoCmsAbout.contentNode.childMarkdownRemark.html
+              __html: edges[lang].node.biographie.childMarkdownRemark.html
             }}
           />
         </Section>
