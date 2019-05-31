@@ -55,6 +55,8 @@ typings/
 .env
 .env.environment
 .env.production
+.env.development
+
 
 # gatsby files
 .cache/
