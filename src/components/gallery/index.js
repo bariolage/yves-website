@@ -52,7 +52,7 @@ export default ({ edges, columns, withLighbox = false }) => {
       setImages(
         edges.map((e, i) => ({
           //index: i,
-          ...e.bigFluid,
+          ...e.fluid,
         }))
       )
     }

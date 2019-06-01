@@ -22,7 +22,6 @@ const AlbumTemplate = ({ data: { contentFR, contentUS } }) => {
     images.push({
       id: e.id,
       fluid: e.fluid,
-      bigFluid: e.localFile.childImageSharp.fluid,
       figcaption: e.title
     })
   })
@@ -86,13 +85,7 @@ export const albumQuery = graphql`
             fluid(maxWidth: 300) {
               ...GatsbyContentfulFluid_withWebp_noBase64
             }
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 500) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
+            
           }
         }
       }
