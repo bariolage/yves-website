@@ -36,6 +36,7 @@ export default ({ children, gap, minWidth = 250 }) => {
 
   createCols()
 
+  
   return (
     <Masonry ref={ref} gap={gap}>
       {Array(numCols)

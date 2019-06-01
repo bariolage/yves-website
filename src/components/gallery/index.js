@@ -5,6 +5,7 @@ import styled from "styled-components"
 import { Link } from "../elements"
 import Lightbox from "react-images"
 import Masonry from "./masonry"
+import { useTrail, animated } from "react-spring"
 
 const Figure = styled(
   forwardRef((props, ref) => <Box {...props} ref={ref} as="figure" />)
@@ -50,39 +51,47 @@ export default ({ edges, columns, withLighbox = false }) => {
     if (images.length === 0 && edges) {
       setImages(
         edges.map((e, i) => ({
-          index: i,
-          height: e.fluid.height,
-          width: e.fluid.width,
-          src: e.fluid.src,
-          srcSet: e.fluid.srcSet,
-          fluid: e.fluid,
-          caption: e.figcaption
+          //index: i,
+          ...e.bigFluid,
         }))
       )
     }
+    console.log(images)
   }, [images])
-
+  const [trail, set, stop] = useTrail(edges.length, () => ({
+    opacity: 0,
+    transform: "translate3d(0, 16px, 0)"
+  }))
+  set({ opacity: 1, transform: "translate3d(0, 0px, 0)" })
+  stop()
   return (
     <>
       <Masonry>
-        {edges.map((edge, index) => (
-          <Figure
-            key={edge.id}
-            onClick={() => {
-              setCurrent(index)
-              setOpen(true)
-            }}
-            withLighbox={withLighbox}
-          >
-            {withLighbox ? (
-              <Img fluid={edge.fluid} alt={edge.figcaption} />
-            ) : (
-              <Link to={edge.link} aria-label={edge.figcaption}>
-                <Img fluid={edge.fluid} alt={edge.figcaption} />
-                <Figcaption>{edge.figcaption}</Figcaption>
-              </Link>
-            )}
-          </Figure>
+        {trail.map((props, index) => (
+          <animated.div style={props} key={edges[index].id}>
+            <Figure
+              onClick={() => {
+                setCurrent(index)
+                setOpen(true)
+              }}
+              withLighbox={withLighbox}
+            >
+              {withLighbox ? (
+                <Img fluid={edges[index].fluid} alt={edges[index].figcaption} />
+              ) : (
+                <Link
+                  to={edges[index].link}
+                  aria-label={edges[index].figcaption}
+                >
+                  <Img
+                    fluid={edges[index].fluid}
+                    alt={edges[index].figcaption}
+                  />
+                  <Figcaption>{edges[index].figcaption}</Figcaption>
+                </Link>
+              )}
+            </Figure>
+          </animated.div>
         ))}
       </Masonry>
       {withLighbox && (
