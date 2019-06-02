@@ -1,14 +1,11 @@
 import React, { useContext } from "react"
 import { graphql, Link as GatsbyLink } from "gatsby"
-import { Box } from "rebass"
 import { Header, Layout, Gallery } from "../components"
 import {
   Article,
   Toggle,
   H2,
-  Link,
-  Paragraph,
-  Section
+  Link
 } from "../components/elements"
 import { FiX } from "react-icons/fi"
 import Context from "../components/store"
@@ -21,6 +18,7 @@ const AlbumTemplate = ({ data: { contentFR, contentUS } }) => {
   edges.node.gallery.forEach(e => {
     images.push({
       id: e.id,
+      link: `${edges.node.slug}/${e.fields.slug}`,
       fluid: e.fluid,
       figcaption: e.title
     })
@@ -41,7 +39,7 @@ const AlbumTemplate = ({ data: { contentFR, contentUS } }) => {
           <H2>
             {context.lang ? edges.node.name : contentUS.edges[0].node.name}
           </H2>
-          <Link as={GatsbyLink} to="/" aria-label="retour">
+          <Link to="/" aria-label="retour">
             <Toggle>
               <FiX size={16} />
             </Toggle>
@@ -55,7 +53,7 @@ const AlbumTemplate = ({ data: { contentFR, contentUS } }) => {
             />
           </Section>
         ) */}
-        <Gallery withLighbox edges={images} />
+        <Gallery isAlbum edges={images} />
       </Article>
     </Layout>
   )
@@ -81,11 +79,13 @@ export const albumQuery = graphql`
           }
           gallery {
             id
+            fields {
+              slug
+            }
             title
             fluid(maxWidth: 300) {
               ...GatsbyContentfulFluid_withWebp_noBase64
             }
-            
           }
         }
       }

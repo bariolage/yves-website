@@ -1,17 +1,18 @@
 const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const GithubSlugger = require("github-slugger")
+const slugger = new GithubSlugger()
 
-/* exports.onCreateNode = ({ node, actions, getNode }) => {
+exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
-  if (node.internal.type === "DatoCmsTheme") {
-    const value = createFilePath({ node, getNode })
+  if (node.internal.type === "ContentfulAsset") {
+    const assetSlug = slugger.slug(node.title)
     createNodeField({
       name: "slug",
       node,
-      value
+      value: assetSlug
     })
   }
-} */
+}
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
@@ -20,11 +21,18 @@ exports.createPages = ({ graphql, actions }) => {
       graphql(
         `
           {
-            allContentfulTheme(filter: {node_locale: {eq: "fr"}}) {
+            allContentfulTheme(filter: { node_locale: { eq: "fr" } }) {
               edges {
                 node {
                   contentful_id
                   slug
+                  gallery {
+                    id
+                    title
+                    fields {
+                      slug
+                    }
+                  }
                 }
               }
             }
@@ -40,6 +48,23 @@ exports.createPages = ({ graphql, actions }) => {
             path: node.slug,
             component: path.resolve(`./src/templates/album.js`),
             context: { id: node.contentful_id }
+          })
+
+          node.gallery.forEach((e, index) => {
+            const next =
+              index === node.gallery.length - 1 ? null : node.gallery[index + 1]
+            const previous = index === 0 ? null : node.gallery[index - 1]
+            const albumSlug = node.slug
+            createPage({
+              path: `${node.slug}/${e.fields.slug}`,
+              component: path.resolve(`./src/templates/photo.js`),
+              context: {
+                slug: e.fields.slug,
+                previous,
+                next,
+                albumSlug
+              }
+            })
           })
         })
       })

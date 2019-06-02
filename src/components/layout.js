@@ -50,19 +50,18 @@ const Wrap = styled(Box)`
   min-height: 100vh;
 `
 const Main = styled(Box)`
+  height: 100%;
   margin: 0 auto;
   max-width: 60em;
 `
 
-
-const Layout = ({ children, albumData }) => {
-
+const Layout = ({ children, albumData, ...props }) => {
   return (
     <ThemeProvider theme={theme}>
-      <Wrap width={1} px={[2, 3, 4]} py={[3,3,4]}>
+      <Wrap width={1} px={[2, 3, 4]} py={[3, 3, 4]}>
         <SEO albumData={albumData} />
         <GlobalStyle />
-        <Header id="#home" />
+        {!props.photo && <Header id="#home" />}
         <Main as="main" width={1}>
           {children}
         </Main>
