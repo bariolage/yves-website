@@ -11,10 +11,14 @@ export default ({ edges, isAlbum = false }) => {
       <Masonry>
         {edges.map(edge => (
           <Figure key={edge.id}>
-            <Link to={edge.link} aria-label={edge.figcaption}>
+            {edge.link ? (
+              <Link to={edge.link} aria-label={edge.figcaption}>
+                <Img fluid={edge.fluid} alt={edge.figcaption} />
+                <Figcaption>{!isAlbum && edge.figcaption}</Figcaption>
+              </Link>
+            ) : (
               <Img fluid={edge.fluid} alt={edge.figcaption} />
-              <Figcaption>{!isAlbum && edge.figcaption}</Figcaption>
-            </Link>
+            )}
           </Figure>
         ))}
       </Masonry>

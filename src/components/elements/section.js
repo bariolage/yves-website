@@ -10,6 +10,7 @@ const Section = styled(
       flexDirection="column"
       px={[2, 4, 6]}
       p={2}
+      py={[2,3,4]}
       ref={ref}
     />
   ))

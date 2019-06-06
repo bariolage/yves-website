@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
 import { FiX } from "react-icons/fi"
-import { Header, Layout } from "../components"
+import { Header, Layout, Gallery } from "../components"
 import {
   Article,
   Toggle,
@@ -30,12 +30,27 @@ const AboutPage = () => {
                   html
                 }
               }
+              exposititions {
+                id
+                title
+                fluid(maxWidth: 300) {
+                  ...GatsbyContentfulFluid_withWebp_noBase64
+                }
+              }
             }
           }
         }
       }
     `
   )
+  const images = []
+  edges[0].node.exposititions.forEach(e => {
+    images.push({
+      id: e.id,
+      fluid: e.fluid,
+      figcaption: e.title
+    })
+  })
   return (
     <Layout>
       <Article>
@@ -54,6 +69,8 @@ const AboutPage = () => {
             }}
           />
         </Section>
+        <H2 py={[2,3,4,5]}>Expositions</H2>
+        <Gallery edges={images} />
       </Article>
     </Layout>
   )

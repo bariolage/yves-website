@@ -80,7 +80,7 @@ export const photoQuery = graphql`
     contentfulAsset(fields: { slug: { eq: $slug } }) {
       id
       title
-      fluid(maxWidth: 600) {
+      fluid(maxWidth: 1200, quality: 100) {
         ...GatsbyContentfulFluid_tracedSVG
       }
     }
