@@ -81,7 +81,7 @@ export const photoQuery = graphql`
       id
       title
       fluid(maxWidth: 1200, quality: 100) {
-        ...GatsbyContentfulFluid_tracedSVG
+        ...GatsbyContentfulFluid
       }
     }
   }
