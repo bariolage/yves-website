@@ -2,7 +2,7 @@ import React from "react"
 import Helmet from "react-helmet"
 import { graphql, useStaticQuery } from "gatsby"
 
-const SEO = ({ albumData }, isa) => {
+const SEO = ({ albumData }) => {
   const {
     site: { siteMetadata: base }
   } = useStaticQuery(
@@ -55,8 +55,8 @@ const SEO = ({ albumData }, isa) => {
     }
   }
 
-  const schema = albumData ? [...baseSchema, ...albumSchema] : baseSchema
-
+  //const schema = albumData ? [...baseSchema, ...albumSchema] : baseSchema
+  const schema = baseSchema
   const title = albumData.title || base.title
   const description = albumData.description || base.description
   const image = albumData.banner || base.banner
