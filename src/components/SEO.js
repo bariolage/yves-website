@@ -47,7 +47,7 @@ const SEO = ({ albumData }, isa) => {
     description: albumData.description,
     image: albumData.banner,
     name: albumData.title,
-    url: `${base.siteUrl}/${albumData.slug}`,
+    url: albumData ? `${base.siteUrl}/${albumData.slug}` : base.siteUrl,
     author: {
       "@type": "Person",
       name: base.author,
