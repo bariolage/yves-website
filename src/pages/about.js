@@ -70,7 +70,7 @@ const AboutPage = () => {
           />
         </Section>
         <H2 py={[2,3,4,5]}>Expositions</H2>
-        <Gallery isAlbum edges={images} />
+        <Gallery edges={images} />
       </Article>
     </Layout>
   )
