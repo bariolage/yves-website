@@ -5,7 +5,7 @@ module.exports = {
   shortTitle: "YLB",
   author: "Yves le Bras",
   description: "Yves le Bras - Portfolio | Artiste, Brest",
-  siteUrl: "https://jolly-ptolemy-91f908.netlify.com",
+  siteUrl: "https://yveslebras.fr",
   siteLanguage: "fr",
   banner: "assets/images/banner.png",
   favicon: "assets/images/favicon.png",
