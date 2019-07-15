@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"
+import Img from "gatsby-image/withIEPolyfill"
 import { FiX } from "react-icons/fi"
 import { Header, Layout, Gallery } from "../components"
 import {
@@ -33,6 +34,9 @@ const AboutPage = () => {
               exposititions {
                 id
                 title
+                file {
+                  url
+                }
                 fluid(maxWidth: 300) {
                   ...GatsbyContentfulFluid_withWebp_noBase64
                 }
@@ -48,7 +52,8 @@ const AboutPage = () => {
     images.push({
       id: e.id,
       fluid: e.fluid,
-      figcaption: e.title
+      figcaption: e.title,
+      url: e.file.url
     })
   })
   return (
@@ -69,8 +74,8 @@ const AboutPage = () => {
             }}
           />
         </Section>
-        <H2 py={[2,3,4,5]}>Expositions</H2>
-        <Gallery isAlbum edges={images} />
+        <H2 py={[2, 3, 4, 5]}>Expositions</H2>
+        <Gallery edges={images} />
       </Article>
     </Layout>
   )

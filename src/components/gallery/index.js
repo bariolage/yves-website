@@ -16,6 +16,11 @@ export default ({ edges, isAlbum = false }) => {
                 <Img fluid={edge.fluid} alt={edge.figcaption} />
                 <Figcaption>{!isAlbum && edge.figcaption}</Figcaption>
               </Link>
+            ) : edge.url ? (
+              <Link href={edge.url} target="blank" aria-label={edge.figcaption}>
+                <Img fluid={edge.fluid} alt={edge.figcaption} />
+                <Figcaption>{!isAlbum && edge.figcaption}</Figcaption>
+              </Link>
             ) : (
               <Img fluid={edge.fluid} alt={edge.figcaption} />
             )}
